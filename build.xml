@@ -1,0 +1,26 @@
+<project>
+    <path id="class.path">
+      <fileset dir="lib">
+        <include name="**/*.jar" />
+      </fileset>
+    </path>
+
+    <target name="javac">
+        <mkdir dir="bin" />
+        <javac srcdir="src" destdir="bin" >
+            <classpath refid="class.path" />
+        </javac>
+    </target>
+
+    <target name="jar" depends="javac">
+        <jar destfile="jrc.jar">
+            <fileset dir="bin"/>
+            <zipgroupfileset dir="lib" includes="**/*.jar" />
+            <manifest>
+                  <attribute name="Main-Class" value="com.codeight.jrc.Main"/>
+            </manifest>
+       </jar>
+    </target>
+
+
+</project>
