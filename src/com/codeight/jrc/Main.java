@@ -56,9 +56,19 @@ public class Main
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
-		readInputFile();
+		if(args.length == 0) { 
+            readInputFile(); 
+        } else {
+            TestReport _1 = new TestReport(args[0], args[0]);
+            TestReport _2 = new TestReport(args[1], args[1]);
+            read(_1, _1.getReportPath());
+            read(_2, _2.getReportPath());
+
+            if(checkAcceptance(_1, _2) == false) System.exit(1);
+            System.exit(0);
+        }
 		generateDiff();
 	}
 
@@ -174,6 +184,14 @@ public class Main
 			}
 		}
 	}
+
+    private static boolean checkAcceptance(TestReport baseReport, TestReport guestReport) {
+        if(baseReport.getTotalFailedCases() < guestReport.getTotalFailedCases()) {
+            System.out.println("JUnit comparison failed: base test number is greated than guest one.");
+            return false;
+        }
+        return true;
+    }
 
 	/**
 	 * This method reads the combinations of comparison given by the user and

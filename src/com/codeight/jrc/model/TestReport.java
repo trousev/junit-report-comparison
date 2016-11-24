@@ -56,6 +56,17 @@ public class TestReport
 	}
 
 	/**
+	 * Creates a new instance with the given report name and path.
+	 * @param reportName
+     * @param reportPath
+	 */
+	public TestReport(String reportName, String reportPath)
+	{
+		this.reportName = reportName;
+		this.reportPath = reportPath;
+	}
+
+	/**
 	 * @return Report Name
 	 */
 	public String getReportName()
