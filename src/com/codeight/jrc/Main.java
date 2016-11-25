@@ -186,10 +186,27 @@ public class Main
 	}
 
     private static boolean checkAcceptance(TestReport baseReport, TestReport guestReport) {
-        if(baseReport.getTotalFailedCases() < guestReport.getTotalFailedCases()) {
-            System.out.println("JUnit comparison failed: base test number is greated than guest one.");
+        ReportDiff diff = new ReportDiff(baseReport, guestReport);
+        if(diff.getPF_Cases().size() > 0) {
+            System.out.println("There are tests which became failing. Abort.");
             return false;
         }
+        if(diff.getPE_Cases().size() > 0) {
+            System.out.println("There are tests which became errorrness. Abort.");
+            return false;
+        }
+        if(diff.getCasesDifferingInError().size() > 0) {
+            System.out.println("There are tests which fails diffenrently now but still fails.");
+            return false;
+        }
+        if(diff.getCasesDifferingInFailure().size() > 0) {
+            System.out.println("There are tests which fails diffenrently now but still fails.");
+            return false;
+        }
+        /*if(baseReport.getTotalFailedCases() < guestReport.getTotalFailedCases()) {
+            System.out.println("JUnit comparison failed: base test number is greated than guest one.");
+            return false;
+        }*/
         return true;
     }
 
