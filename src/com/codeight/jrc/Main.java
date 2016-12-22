@@ -203,10 +203,14 @@ public class Main
             System.out.println("There are tests which fails diffenrently now but still fails.");
             return false;
         }
-        /*if(baseReport.getTotalFailedCases() < guestReport.getTotalFailedCases()) {
+        if(diff.getDeletedCases().size() > 0) {
+            System.out.println("There are disappeared tests.");
+            return false;
+        }
+        if(baseReport.getTotalFailedCases() < guestReport.getTotalFailedCases()) {
             System.out.println("JUnit comparison failed: base test number is greated than guest one.");
             return false;
-        }*/
+        }
         return true;
     }
 
