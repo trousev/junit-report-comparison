@@ -204,7 +204,7 @@ public class Main
             return false;
         }
         if(diff.getDeletedCases().size() > 0) {
-            System.out.println("There are disappeared tests.");
+            System.out.println("There are disappeared tests, first one: "+diff.getDeletedCases().get(0).getCaseName());
             return false;
         }
         if(baseReport.getTotalFailedCases() < guestReport.getTotalFailedCases()) {
